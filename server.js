@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
-const cors = require('cors');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,14 +13,18 @@ app.use(bodyParser.json());
 // Seus arquivos HTML, CSS e JS devem estar dentro de uma pasta chamada 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors(corsOptions));
-
 // Permite que seu frontend se conecte (CORS) - **IMPORTANTE PARA TESTE**
-const corsOptions = {
-    origin: ['https://geve-dev.vercel.app', 'http://localhost:3000'], // Lista de origens permitidas
-    methods: 'POST,GET',
-    allowedHeaders: 'Content-Type',
-};
+app.use((req, res, next) => {
+    // Permite requisições do seu domínio na Vercel e de previews
+    const allowedOrigins = ['https://geve-dev.vercel.app', 'http://localhost:3000', process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.header('Access-Control-Allow-Methods', 'POST, GET');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 // Configuração do Transportador SMTP (Mantenha suas credenciais aqui)
 let transporter = nodemailer.createTransport({
