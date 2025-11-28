@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+:root {
+    --brand-color: #7fffd4;
+    --brand-glow: #00ffd0;
+
+    --master-black: #000000;
+    --master-white: #ffffff;
+
+    --background-color: #070707;
+
+    --surface-color: #0d0d0d;
+    --surface-opacity:  #2424243f;
+    --surface-clear:  #3939393f;
+    --surface-gradient: linear-gradient(45deg,
+    #111 0%,
+    #333 25%,
+    #222 50%,
+    #333 75%,
+    #111 100%);
+    --surface-highlight: rgba(127, 255, 212, 0.3);
+
+    --text-color-primary: #ffffff;
+    --text-color-secondary: #afafaf;
+    --text-color-accent: var(--brand-color);
+
+    --shadow-dark: rgba(0, 0, 0, 0.93);
+    --shadow-color: rgba(68, 179, 142, 0.5);
+    --shadow-glow: rgba(0, 255, 208, 0.5);
+
+
+    --font-family: "Poppins", sans-serif;
+    --font-heading: 'Orbitron', sans-serif;
+
+    --text-xl: 2.5rem;
+    --text-xlg: 2.25rem;
+    --text-lg: 2rem;
+    --text-mdlg: 1.75rem;
+    --text-md: 1.5rem;
+    --text-smd: 1rem;
+    --text-sm: 0.875rem;
+}
+
+body {
+    font: var(--md);
+    color: var(--text-color-secondary);
+    background-color: var(--master-black);
+    /* background-image: url('assets/imgs/banner.mp4'); */
+    overflow-x: hidden;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+/* Scroll reveal utility classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    will-change: opacity, transform;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional: allow delay via CSS variable */
+.reveal[data-delay] { 
+    transition-delay: var(--delay, 0ms);
+}
+
